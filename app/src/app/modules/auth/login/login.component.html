@@ -1,0 +1,16 @@
+<p>login works!</p>
+<div [formGroup]="formGroup">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Username"
+    formControlName="username"
+  />
+  <input
+    type="password"
+    class="form-control"
+    placeholder="Hasło"
+    formControlName="password"
+  />
+  <button type="button" (click)="login()">Zaloguj</button>
+</div>

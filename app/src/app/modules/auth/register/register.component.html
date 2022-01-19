@@ -1,0 +1,27 @@
+<div [formGroup]="formGroup">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Nazwa użytkownika"
+    formControlName="username"
+  />
+  <input
+    type="email"
+    class="form-control"
+    placeholder="Email"
+    formControlName="email"
+  />
+  <input
+    type="password"
+    class="form-control"
+    placeholder="Hasło"
+    formControlName="password"
+  />
+  <input
+    type="password"
+    class="form-control"
+    placeholder="Powtórz hasło"
+    formControlName="confirmPassword"
+  />
+  <button type="button" (click)="register()">Zarejestruj</button>
+</div>
