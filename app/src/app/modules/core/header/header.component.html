@@ -1,8 +1,12 @@
 <header>
+  <mat-toolbar color="primary">
+    <span>AI App</span>
+    <span class="example-spacer"></span>
     <nav>
-        <a routerLink="">Strona główna</a>
-        <a routerLink="/logowanie">Logowanie</a>
-        <a routerLink="/rejestracja">Rejestracja</a>
-        <a routerLink="/wycena">Wyceń</a>
+      <a routerLink="" mat-button><mat-icon>home</mat-icon> Strona główna</a>
+      <a routerLink="/logowanie" mat-button>Logowanie</a>
+      <a routerLink="/rejestracja" mat-button>Rejestracja</a>
+      <a routerLink="/wycena" mat-raised-button color="accent">Wyceń</a>
     </nav>
+  </mat-toolbar>
 </header>
