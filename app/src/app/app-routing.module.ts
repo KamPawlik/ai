@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { HomeViewComponent } from './modules/core/home-view/home-view.component';
+import { RateEditViewComponent } from './modules/rate/rate-edit-view/rate-edit-view.component';
 
 const routes: Routes = [
   { path: '', component: HomeViewComponent },
   { path: 'logowanie', component: LoginComponent },
   { path: 'rejestracja', component: RegisterComponent },
+  { path: 'wycena', component: RateEditViewComponent },
 ];
 
 @NgModule({

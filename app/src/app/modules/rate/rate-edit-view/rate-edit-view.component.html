@@ -1,0 +1,21 @@
+<p>rate-edit-view works!</p>
+<form [formGroup]="formGroup">
+  <div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nazwa"
+      formControlName="name"
+    />
+  </div>
+  <div>
+    <textarea
+      type="text"
+      class="form-control"
+      placeholder="Opis"
+      formControlName="description"
+    ></textarea>
+  </div>
+
+  <button (click)="save()">Dodaj wycenę</button>
+</form>

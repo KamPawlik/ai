@@ -7,6 +7,7 @@ import { HomeViewComponent } from './modules/core/home-view/home-view.component'
 import { HeaderComponent } from './modules/core/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
+import { RateModule } from './modules/rate/rate.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AuthModule } from './modules/auth/auth.module';
     AppRoutingModule,
     ReactiveFormsModule,
     AuthModule,
+    RateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
