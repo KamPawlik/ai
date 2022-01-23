@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProgressBarMode } from '@angular/material/progress-bar';
+import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services';
 
 @Component({
@@ -9,6 +11,10 @@ import { AuthService } from 'src/app/core/services';
 })
 export class RegisterComponent implements OnInit {
   formGroup: FormGroup;
+  mode: ProgressBarMode = 'indeterminate';
+  loading = false;
+  hidePassword = true;
+  hideConfirmPassword = true;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.formGroup = this.fb.group({
@@ -31,8 +37,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   async register(): Promise<void> {
+    this.loading = true;
     this.authService
       .register(this.formGroup.value)
+      .pipe(finalize(() => (this.loading = false)))
       .toPromise()
       .then((res) => console.log('#TODO RES = ', res))
       .catch((err) => console.log('#TODO ERROR = ', err));

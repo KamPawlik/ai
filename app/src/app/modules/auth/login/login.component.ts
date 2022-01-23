@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -5,6 +6,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ProgressBarMode } from '@angular/material/progress-bar';
+import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services';
 
 @Component({
@@ -17,6 +20,8 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   username: FormControl;
   password: FormControl;
+  mode: ProgressBarMode = 'indeterminate';
+  loading = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.username = this.fb.control('', Validators.required);
@@ -31,8 +36,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   async login(): Promise<void> {
+    this.loading = true;
     this.authService
       .login(this.formGroup.value)
+      .pipe(finalize(() => (this.loading = false)))
       .toPromise()
       .then((res) => console.log('#TODO res = ', res))
       .catch((err) => console.log('#TODO err = ', err));

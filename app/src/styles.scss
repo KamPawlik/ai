@@ -8,9 +8,22 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
 .container {
   width: 100%;
   max-width: 1200px;
   padding: 0 20px;
   margin: 0 auto;
+}
+
+.form {
+  &-wrapper {
+    max-width: 500px;
+    margin: 2em auto;
+  }
+  display: grid;
+  grid-gap: 1em;
+  &-group {
+    width: 100%;
+  }
 }
