@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -40,6 +41,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   async login(): Promise<void> {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAsDirty();
+      this.formGroup.markAllAsTouched();
+      return;
+    }
     this.loading = true;
     this.authService
       .login(this.formGroup.value)

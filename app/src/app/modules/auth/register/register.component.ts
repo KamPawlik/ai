@@ -39,6 +39,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   async register(): Promise<void> {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAsDirty();
+      this.formGroup.markAllAsTouched();
+      return;
+    }
     this.loading = true;
     this.authService
       .register(this.formGroup.value)

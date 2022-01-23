@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProgressBarMode } from '@angular/material/progress-bar';
 import { RateService } from 'src/app/core/services/rate.service';
 
 @Component({
@@ -8,6 +9,9 @@ import { RateService } from 'src/app/core/services/rate.service';
   styleUrls: ['./rate-edit-view.component.scss'],
 })
 export class RateEditViewComponent implements OnInit {
+  hide = true;
+  mode: ProgressBarMode = 'indeterminate';
+  loading = false;
   formGroup: FormGroup;
 
   constructor(private fb: FormBuilder, private rateService: RateService) {
@@ -23,6 +27,11 @@ export class RateEditViewComponent implements OnInit {
   ngOnInit(): void {}
 
   save() {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAsDirty();
+      this.formGroup.markAllAsTouched();
+      return;
+    }
     this.rateService
       .createRate(this.formGroup.value)
       .toPromise()

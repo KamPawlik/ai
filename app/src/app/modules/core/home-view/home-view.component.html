@@ -1,1 +1,13 @@
-<p>home-view works!</p>
+<div class="container" style="margin-top: 10%">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Wyceny">
+      <div>Wyceny</div>
+      <div *ngFor="let rate of rates$ | async">
+        <pre>{{ rate | json }}</pre>
+      </div>
+    </mat-tab>
+    <mat-tab label="Wyceń">
+      <app-rate-edit-view></app-rate-edit-view>
+    </mat-tab>
+  </mat-tab-group>
+</div>

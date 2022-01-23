@@ -1,5 +1,4 @@
-<p>rate-edit-view works!</p>
-<form [formGroup]="formGroup">
+<!-- <form [formGroup]="formGroup">
   <div>
     <input
       type="text"
@@ -18,4 +17,49 @@
   </div>
 
   <button (click)="save()">Dodaj wycenę</button>
-</form>
+</form> -->
+
+<mat-card>
+  <mat-card-content>
+    <form id="login" [formGroup]="formGroup" class="form" (ngSubmit)="save()">
+      <mat-form-field class="form-group">
+        <mat-label>Nazwa</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="formGroup.controls['name'].invalid">
+          Pole obowiązkowe
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-group">
+        <mat-label>Opis</mat-label>
+        <textarea
+          matInput
+          type="text"
+          class="form-control"
+          placeholder="Opis"
+          formControlName="description"
+        ></textarea>
+        <mat-error
+          *ngIf="formGroup.controls['description'].hasError('required')"
+        >
+          Pole obowiązkowe
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions>
+    <button
+      type="submit"
+      form="login"
+      mat-raised-button
+      color="primary"
+      class="w-100"
+    >
+      Dodaj wycenę
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="loading" [mode]="mode"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
