@@ -1,0 +1,8 @@
+.fixed {
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}

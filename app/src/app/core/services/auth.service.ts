@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { LoginRequest, LoginResponse, UserData } from '../interfaces';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 const jwt = new JwtHelperService();
 
@@ -19,7 +20,7 @@ export interface DecodedToken {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   public getExpiration(): moment.Moment {
     return moment.unix(this.getdecodeToken().exp);
@@ -41,6 +42,7 @@ export class AuthService {
   public logout() {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('auth_token');
+    this.router.navigate(['/logowanie']);
   }
 
   public register(userData: UserData) {

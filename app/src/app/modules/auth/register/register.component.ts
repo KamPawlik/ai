@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { finalize } from 'rxjs/operators';
@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/core/services';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  @Output() registerSuccess = new EventEmitter<void>();
+
   formGroup: FormGroup;
   mode: ProgressBarMode = 'indeterminate';
   loading = false;
@@ -42,7 +44,11 @@ export class RegisterComponent implements OnInit {
       .register(this.formGroup.value)
       .pipe(finalize(() => (this.loading = false)))
       .toPromise()
-      .then((res) => console.log('#TODO RES = ', res))
+      .then((res) => {
+        this.formGroup.reset();
+        this.registerSuccess.emit();
+        console.log('#TODO RES = ', res);
+      })
       .catch((err) => console.log('#TODO ERROR = ', err));
   }
 }

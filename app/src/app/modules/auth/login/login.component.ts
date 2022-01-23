@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services';
 
@@ -22,7 +23,11 @@ export class LoginComponent implements OnInit {
   mode: ProgressBarMode = 'indeterminate';
   loading = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.username = this.fb.control('', Validators.required);
     this.password = this.fb.control('', Validators.required);
 
@@ -40,7 +45,10 @@ export class LoginComponent implements OnInit {
       .login(this.formGroup.value)
       .pipe(finalize(() => (this.loading = false)))
       .toPromise()
-      .then((res) => console.log('#TODO res = ', res))
+      .then((res) => {
+        console.log('#TODO res = ', res);
+        this.router.navigate(['/']);
+      })
       .catch((err) => console.log('#TODO err = ', err));
   }
 

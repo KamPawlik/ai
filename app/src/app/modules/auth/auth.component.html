@@ -35,7 +35,7 @@
       </button>
     </div>
     <div *ngIf="!isLogin" [@grow]>
-      <app-register></app-register>
+      <app-register (registerSuccess)="isLogin = !isLogin"></app-register>
     </div>
   </div>
 </div>
