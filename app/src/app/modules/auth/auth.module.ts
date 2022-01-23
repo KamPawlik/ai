@@ -13,11 +13,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AuthComponent } from './auth.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, AuthComponent],
   imports: [
     HttpClientModule,
+    BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,

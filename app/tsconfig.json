@@ -19,6 +19,9 @@
     "lib": ["es2018", "dom"],
     "strictNullChecks": false
   },
+  "typingOptions": {
+    "enableAutoDiscovery": true
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

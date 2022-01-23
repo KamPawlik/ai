@@ -1,5 +1,5 @@
 <mat-card class="form-wrapper">
-  <mat-card-title>Rejestracja</mat-card-title>
+  <!-- <mat-card-title>Rejestracja</mat-card-title> -->
   <mat-card-content>
     <form [formGroup]="formGroup" class="form">
       <mat-form-field class="form-group">
@@ -10,10 +10,11 @@
           class="form-control"
           placeholder="Nazwa użytkownika"
           formControlName="username"
+          required
         />
-        <mat-error *ngIf="formGroup.controls['username'].invalid"
-          >...</mat-error
-        >
+        <mat-error *ngIf="formGroup.controls['username'].invalid">
+          Pole obowiązkowe
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Email</mat-label>
@@ -22,6 +23,7 @@
           matInput
           formControlName="email"
           placeholder="Ex. pat@example.com"
+          required
         />
         <mat-error
           *ngIf="
@@ -29,10 +31,10 @@
             !formGroup.controls['email'].hasError('required')
           "
         >
-          Please enter a valid email address
+          Proszę wpisać poprawny adres e-mail
         </mat-error>
         <mat-error *ngIf="formGroup.controls['email'].hasError('required')">
-          Email is <strong>required</strong>
+          Pole obowiązkowe
         </mat-error>
       </mat-form-field>
 
@@ -45,30 +47,37 @@
           class="form-control"
           placeholder="Hasło"
           formControlName="password"
+          required
         />
         <button
+          type="button"
           mat-icon-button
           matSuffix
           (click)="hidePassword = !hidePassword"
-          [attr.aria-label]="'Hide password'"
+          [attr.aria-label]="'Ukryj hasło'"
           [attr.aria-pressed]="hidePassword"
         >
           <mat-icon>{{
             hidePassword ? "visibility_off" : "visibility"
           }}</mat-icon>
         </button>
+        <mat-error *ngIf="formGroup.controls['password'].hasError('required')">
+          Pole obowiązkowe
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="form-group">
-        <mat-label>Hasło</mat-label>
+        <mat-label>Potwierdź hasło</mat-label>
         <input
           matInput
           type="password"
           [type]="hideConfirmPassword ? 'password' : 'text'"
           class="form-control"
-          placeholder="Powtórz hasło"
+          placeholder="Potwierdź hasło"
           formControlName="confirmPassword"
+          required
         />
         <button
+          type="button"
           mat-icon-button
           matSuffix
           (click)="hideConfirmPassword = !hideConfirmPassword"
@@ -79,6 +88,11 @@
             hideConfirmPassword ? "visibility_off" : "visibility"
           }}</mat-icon>
         </button>
+        <mat-error
+          *ngIf="formGroup.controls['confirmPassword'].hasError('required')"
+        >
+          Pole obowiązkowe
+        </mat-error>
       </mat-form-field>
     </form>
   </mat-card-content>
@@ -89,6 +103,7 @@
       (click)="register()"
       mat-raised-button
       color="primary"
+      class="w-100"
     >
       Zarejestruj
     </button>

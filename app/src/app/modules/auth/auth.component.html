@@ -1,0 +1,41 @@
+<div [@blockInitialRenderAnimation]>
+  <div class="auth-container">
+    <h2>Witaj ponownie</h2>
+    <div *ngIf="isLogin" [@grow]>
+      <div>
+        <app-login></app-login>
+      </div>
+    </div>
+    <div *ngIf="!isLogin" [@grow]>
+      <button
+        type="button"
+        (click)="isLogin = !isLogin"
+        mat-raised-button
+        color="primary"
+        class="w-100"
+      >
+        Zaloguj
+      </button>
+    </div>
+  </div>
+
+  <hr class="separator" />
+
+  <div class="auth-container">
+    <h2>Jestem tu pierwszy raz</h2>
+    <div *ngIf="isLogin" [@grow]>
+      <button
+        type="button"
+        (click)="isLogin = !isLogin"
+        mat-raised-button
+        color="primary"
+        class="w-100"
+      >
+        Zarejestruj
+      </button>
+    </div>
+    <div *ngIf="!isLogin" [@grow]>
+      <app-register></app-register>
+    </div>
+  </div>
+</div>
