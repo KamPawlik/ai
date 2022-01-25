@@ -2,6 +2,8 @@
 
 /inne
 
+/server/src/static
+
 # compiled output
 /app/dist
 /app/tmp

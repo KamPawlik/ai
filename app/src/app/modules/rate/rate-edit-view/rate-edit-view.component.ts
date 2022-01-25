@@ -21,6 +21,10 @@ export class RateEditViewComponent implements OnInit {
         [Validators.required, Validators.minLength(3), Validators.max(50)],
       ],
       description: ['', [Validators.max(200)]],
+      floor: [''],
+      rooms: [''],
+      sq: [''],
+      year: [''],
     });
   }
 
