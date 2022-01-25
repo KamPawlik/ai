@@ -10,13 +10,11 @@ import { RateEditViewComponent } from './modules/rate/rate-edit-view/rate-edit-v
 
 const routes: Routes = [
   { path: '', component: HomeViewComponent, canActivate: [AuthGuard] },
-  // { path: 'logowanie', component: LoginComponent },
   {
     path: 'logowanie',
     component: AuthComponent,
     canActivate: [AuthLoginGuard],
   },
-  { path: 'rejestracja', component: RegisterComponent },
   {
     path: 'wycena',
     component: RateEditViewComponent,

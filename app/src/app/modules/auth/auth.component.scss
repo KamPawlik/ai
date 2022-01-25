@@ -1,3 +1,8 @@
+:host {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
 .auth-container {
   max-width: 500px;
   margin: 2em auto;

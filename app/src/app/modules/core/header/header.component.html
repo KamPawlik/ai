@@ -1,12 +1,24 @@
-<header>
+<header class="fixed">
   <mat-toolbar color="primary">
-    <span>AI App</span>
-    <span class="example-spacer"></span>
     <nav>
-      <a routerLink="" mat-button><mat-icon>home</mat-icon> Strona główna</a>
-      <a routerLink="/logowanie" mat-button>Logowanie</a>
-      <a routerLink="/rejestracja" mat-button>Rejestracja</a>
-      <a routerLink="/wycena" mat-raised-button color="accent">Wyceń</a>
+      <a routerLink="/" mat-button>
+        <div class="mat-icon-text-wrapper">
+          <mat-icon>home</mat-icon>
+          <span>Wyceny</span>
+        </div>
+      </a>
+      <a routerLink="/wycena" mat-button>
+        <div class="mat-icon-text-wrapper">
+          <mat-icon>paid</mat-icon>
+          <span>Wyceń</span>
+        </div>
+      </a>
+      <button mat-button aria-label="Wyloguj" type="button" (click)="logOut()">
+        <div class="mat-icon-text-wrapper">
+          <mat-icon>logout</mat-icon>
+          <span> Wyloguj</span>
+        </div>
+      </button>
     </nav>
   </mat-toolbar>
 </header>
