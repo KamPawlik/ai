@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { RateService } from 'src/app/core/services/rate.service';
 
 @Component({
@@ -14,7 +16,11 @@ export class RateEditViewComponent implements OnInit {
   loading = false;
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder, private rateService: RateService) {
+  constructor(
+    private fb: FormBuilder,
+    private rateService: RateService,
+    private router: Router
+  ) {
     this.formGroup = this.fb.group({
       name: [
         '',
@@ -36,10 +42,15 @@ export class RateEditViewComponent implements OnInit {
       this.formGroup.markAllAsTouched();
       return;
     }
+    this.loading = true;
     this.rateService
       .createRate(this.formGroup.value)
+      .pipe(finalize(() => (this.loading = false)))
       .toPromise()
-      .then((res) => console.log(res))
+      .then((res) => {
+        this.formGroup.reset();
+        this.router.navigate(['/']);
+      })
       .catch((err) => console.log('#TODO ERROR = ', err));
   }
 }

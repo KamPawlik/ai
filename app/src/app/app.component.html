@@ -1,10 +1,6 @@
 <app-header *ngIf="isAuthorized"></app-header>
-<!-- <div class="fixed" >
-  <a routerLink="/" mat-raised-button color="primary"> Start </a>
-  <a routerLink="/wycena" mat-raised-button color="primary"> Wycen </a>
-  <button type="button" (click)="logOut()" mat-raised-button>Wyloguj</button>
-</div> -->
-
 <div class="container">
-  <router-outlet></router-outlet>
+  <div class="container__inner">
+    <router-outlet></router-outlet>
+  </div>
 </div>

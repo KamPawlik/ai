@@ -16,8 +16,13 @@ body {
 .container {
   width: 100%;
   max-width: 1200px;
-  padding: 0 20px;
   margin: 0 auto;
+  display: grid;
+  height: 100%;
+  align-items: center;
+  &__inner {
+    padding: 2em 2em 8em 2em;
+  }
 }
 
 .form {
