@@ -101,6 +101,11 @@
       </mat-form-field>
     </form>
   </mat-card-content>
+  <app-alert *ngIf="errors">
+    <div *ngFor="let error of errors.error | keyvalue">
+      {{ error.value }}
+    </div>
+  </app-alert>
   <mat-divider inset></mat-divider>
   <mat-card-actions>
     <button

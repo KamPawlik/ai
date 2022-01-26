@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   password: FormControl;
   mode: ProgressBarMode = 'indeterminate';
   loading = false;
+  errors: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
         console.log('#TODO res = ', res);
         this.router.navigate(['/']);
       })
-      .catch((err) => console.log('#TODO err = ', err));
+      .catch((err) => (this.errors = err));
   }
 
   getErrorMessage() {

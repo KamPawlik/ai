@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   loading = false;
   hidePassword = true;
   hideConfirmPassword = true;
+  errors: any = null;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.formGroup = this.fb.group({
@@ -54,6 +55,6 @@ export class RegisterComponent implements OnInit {
         this.registerSuccess.emit();
         console.log('#TODO RES = ', res);
       })
-      .catch((err) => console.log('#TODO ERROR = ', err));
+      .catch((err) => (this.errors = err));
   }
 }

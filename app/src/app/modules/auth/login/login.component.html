@@ -33,6 +33,7 @@
       </mat-form-field>
     </form>
   </mat-card-content>
+  <app-alert *ngIf="errors">{{ errors.error.detail }}</app-alert>
   <mat-divider inset></mat-divider>
   <mat-card-actions>
     <button
