@@ -23,6 +23,12 @@ export class HomeViewComponent implements OnInit, OnDestroy {
   rates$: Observable<Rate[]>;
   destroy$: Subject<boolean>;
 
+  images: string[] = [
+    'apartment-g0be8f0099_1280.jpg',
+    'apartment-gd409e2b70_1280.jpg',
+    'living-room-g6e71a9e0c_1280.jpg',
+  ];
+
   constructor(private rateService: RateService) {}
 
   ngOnInit(): void {
@@ -36,6 +42,10 @@ export class HomeViewComponent implements OnInit, OnDestroy {
     this.rates$.subscribe((res) => {
       console.log('#TODO rates = ', res);
     });
+  }
+
+  get image(): string {
+    return this.images[Math.floor(Math.random() * this.images.length)];
   }
 
   ngOnDestroy(): void {
