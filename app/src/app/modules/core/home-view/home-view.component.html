@@ -1,23 +1,69 @@
-<div class="rates-container">
-  <ng-container *ngIf="rates$ | async as rates">
-    <mat-card class="example-card" *ngFor="let rate of rates">
-      <mat-card-header>
-        <mat-card-title> {{ rate.name }} {{ rate.id }}</mat-card-title>
-      </mat-card-header>
-      <img
-        mat-card-image
-        src="assets/img/apartment-g0be8f0099_1280.jpg"
-        alt="Photo of a Shiba Inu"
-      />
-      <mat-card-content>
-        <p>Opis: {{ rate.description }}</p>
-        <p>Piętro: {{ rate.floor }}</p>
-        <p>Pokoje: {{ rate.rooms }}</p>
-        <p>m<sup>2</sup>: {{ rate.sq }}</p>
-        <p>Rok: {{ rate.year }}</p>
-        <p>Cena: {{ rate.price }}</p>
-      </mat-card-content>
-      <mat-card-actions> </mat-card-actions>
-    </mat-card>
-  </ng-container>
+<div class="container">
+  <mat-form-field appearance="standard" class="w-100">
+    <mat-label>Szukaj</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Nazwa, piętro, cena"
+      #input
+    />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Lp.</th>
+        <td mat-cell *matCellDef="let row; let i = index">
+          <!-- {{ i + 1 + paginator.pageIndex * paginator.pageSize }} -->
+          {{ row.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok budowy</th>
+        <td mat-cell *matCellDef="let row">{{ row.year }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="rooms">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Liczba pokoi</th>
+        <td mat-cell *matCellDef="let row">{{ row.rooms }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="floor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Piętro</th>
+        <td mat-cell *matCellDef="let row">{{ row.floor }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sq">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>m<sup>2</sup></th>
+        <td mat-cell *matCellDef="let row">{{ row.sq }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.price | currency: "PLN":true }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          Brak danych pasujących do filtra "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </div>
 </div>

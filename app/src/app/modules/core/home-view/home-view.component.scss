@@ -3,3 +3,10 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 2em;
 }
+
+.rates-wrapper {
+  position: relative;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+}

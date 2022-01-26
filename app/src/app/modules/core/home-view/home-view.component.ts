@@ -1,4 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable, Subject } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
 import { RateService } from 'src/app/core/services/rate.service';
@@ -19,9 +28,23 @@ export interface Rate {
   templateUrl: './home-view.component.html',
   styleUrls: ['./home-view.component.scss'],
 })
-export class HomeViewComponent implements OnInit, OnDestroy {
+export class HomeViewComponent implements AfterViewInit, OnInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  destroy$: Subject<boolean> = new Subject();
   rates$: Observable<Rate[]>;
-  destroy$: Subject<boolean>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'year',
+    'rooms',
+    'floor',
+    'sq',
+    'price',
+  ];
 
   images: string[] = [
     'apartment-g0be8f0099_1280.jpg',
@@ -32,16 +55,32 @@ export class HomeViewComponent implements OnInit, OnDestroy {
   constructor(private rateService: RateService) {}
 
   ngOnInit(): void {
-    this.destroy$ = new Subject();
     this.rates$ = this.rateService.getUserRates().pipe(
       map((v) => v.sort((a: Rate, b: Rate) => b.id - a.id)),
+      map((v) => v.map((v: any, i: any) => ({ ...v, id: i + 1 }))),
       shareReplay(1),
       takeUntil(this.destroy$)
     );
 
     this.rates$.subscribe((res) => {
-      console.log('#TODO rates = ', res);
+      this.dataSource.data = res;
     });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    this.translatePaginator();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   get image(): string {
@@ -51,5 +90,11 @@ export class HomeViewComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  translatePaginator() {
+    this.paginator._intl.itemsPerPageLabel = 'Pozycje na stronie';
+    this.paginator._intl.nextPageLabel = 'Następna';
+    this.paginator._intl.previousPageLabel = 'Poprzednia';
   }
 }

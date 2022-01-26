@@ -36,21 +36,33 @@
         <mat-form-field>
           <mat-label>Piętro</mat-label>
           <input matInput formControlName="floor" type="number" required />
+          <mat-error *ngIf="formGroup.controls['floor'].invalid">
+            Pole obowiązkowe
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Pokoje</mat-label>
           <input matInput formControlName="rooms" type="number" required />
+          <mat-error *ngIf="formGroup.controls['rooms'].invalid">
+            Pole obowiązkowe
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>m<sup>2</sup></mat-label>
           <input matInput formControlName="sq" type="number" required />
+          <mat-error *ngIf="formGroup.controls['sq'].invalid">
+            Pole obowiązkowe
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Rok</mat-label>
           <input matInput formControlName="year" type="number" required />
+          <mat-error *ngIf="formGroup.controls['year'].invalid">
+            Pole obowiązkowe
+          </mat-error>
         </mat-form-field>
       </div>
 
