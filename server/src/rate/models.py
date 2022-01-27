@@ -27,7 +27,7 @@ class Rate(models.Model):
     rooms = models.IntegerField()
 
     price = models.DecimalField(
-        max_digits=8,
+        max_digits=12,
         decimal_places=2,
         null=True,
         validators=[validators.MinValueValidator(Decimal("0.00"))],

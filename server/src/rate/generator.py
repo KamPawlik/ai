@@ -2,7 +2,6 @@ from django.contrib.staticfiles import finders
 
 import pandas as pd
 
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
 def calculate_house_price(house_obj):
@@ -21,9 +20,7 @@ def calculate_house_price(house_obj):
 
     X = houses.drop(['price'], axis=1)
     y = houses['price']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=26)
-
     randomforest = RandomForestRegressor()
-    randomforest.fit(X_train, y_train)
+    randomforest.fit(X, y)
     house_price = randomforest.predict(house_df)[0]
     return house_price
