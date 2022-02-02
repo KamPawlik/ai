@@ -66,6 +66,7 @@
         </mat-form-field>
       </div>
 
+      <app-alert *ngIf="errors">{{ errors.error.detail }}</app-alert>
       <button
         type="submit"
         form="add-rate"
