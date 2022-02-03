@@ -15,6 +15,7 @@ export class RateEditViewComponent implements OnInit {
   mode: ProgressBarMode = 'indeterminate';
   loading = false;
   formGroup: FormGroup;
+  errors: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +52,6 @@ export class RateEditViewComponent implements OnInit {
         this.formGroup.reset();
         this.router.navigate(['/']);
       })
-      .catch((err) => console.log('#TODO ERROR = ', err));
+      .catch((err) => (this.errors = err));
   }
 }

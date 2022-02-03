@@ -55,8 +55,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">
-          Brak danych pasujących do filtra "{{ input.value }}"
+        <td class="mat-cell" colspan="100%">
+          <ng-container *ngIf="input?.value.trim().length > 0; else noData">
+            Brak danych pasujących do filtra "{{ input.value }}"
+          </ng-container>
+          <ng-template #noData> Brak danych </ng-template>
         </td>
       </tr>
     </table>
