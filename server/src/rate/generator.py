@@ -2,7 +2,7 @@ from django.contrib.staticfiles import finders
 
 import pandas as pd
 
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.neural_network import MLPRegressor
 
 def calculate_house_price(house_obj):
     house_df = pd.DataFrame(house_obj,  index=[0])
@@ -20,7 +20,7 @@ def calculate_house_price(house_obj):
 
     X = houses.drop(['price'], axis=1)
     y = houses['price']
-    randomforest = RandomForestRegressor()
+    randomforest = MLPRegressor((3,2))
     randomforest.fit(X, y)
     house_price = randomforest.predict(house_df)[0]
     return house_price
